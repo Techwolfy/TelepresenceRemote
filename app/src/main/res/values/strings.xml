@@ -1,0 +1,33 @@
+<resources>
+    <string name="appName">Telepresence Remote</string>
+
+    <string name="ipLabel">Robot IP Address:</string>
+    <string name="connected">Disconnect</string>
+    <string name="disconnected">Connect</string>
+
+    <string name="buttonOff0">0 Off</string>
+    <string name="buttonOff1">1 Off</string>
+    <string name="buttonOff2">2 Off</string>
+    <string name="buttonOff3">3 Off</string>
+    <string name="buttonOff4">4 Off</string>
+    <string name="buttonOff5">5 Off</string>
+    <string name="buttonOff6">6 Off</string>
+    <string name="buttonOff7">7 Off</string>
+    <string name="buttonOff8">8 Off</string>
+    <string name="buttonOff9">9 Off</string>
+    <string name="buttonOn0">0 On</string>
+    <string name="buttonOn1">1 On</string>
+    <string name="buttonOn2">2 On</string>
+    <string name="buttonOn3">3 On</string>
+    <string name="buttonOn4">4 On</string>
+    <string name="buttonOn5">5 On</string>
+    <string name="buttonOn6">6 On</string>
+    <string name="buttonOn7">7 On</string>
+    <string name="buttonOn8">8 On</string>
+    <string name="buttonOn9">9 On</string>
+
+    <string name="setAllButton">Set All</string>
+    <string name="clearAllButton">Clear All</string>
+
+    <string name="stop">Stop\nRobot</string>
+</resources>

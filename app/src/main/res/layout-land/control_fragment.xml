@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+    <TextView android:id="@+id/ipLabel"
+        android:text="@string/ipLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/ipText"
+        android:layout_alignTop="@+id/ipText"
+        android:gravity="center_vertical" />
+
+    <EditText android:id="@+id/ipText"
+        android:inputType="textUri"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/ipLabel" />
+
+    <Button android:id="@+id/connectButton"
+        android:text="@string/disconnected"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/ipText" />
+
+    <include android:id="@+id/buttonGrid"
+        layout="@layout/button_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/connectButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView android:id="@+id/joystickView"
+        android:src="@drawable/joystick"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
+
+    <Button android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        android:layout_toLeftOf="@+id/joystickView"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
