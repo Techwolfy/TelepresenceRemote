@@ -1,8 +1,6 @@
 package net.g33kworld.telepresenceremote;
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -30,10 +27,7 @@ public class ControlFragment extends Fragment {
     private Button setAllButton;
     private Button clearAllButton;
     private Button stopButton;
-    private ImageView joystick;
-    private Bitmap joystickDot;
-
-    private double[] axes;
+    private JoystickView joystick;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +40,6 @@ public class ControlFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.control_fragment, container, false);
-
-        //Initialize axes temp array
-        axes = new double[2];
 
         //Retrieve and initialize EditText, Button, and Joystick objects
         ipText = (EditText)v.findViewById(R.id.ipText);
@@ -67,8 +58,7 @@ public class ControlFragment extends Fragment {
         setAllButton = (Button)v.findViewById(R.id.setAllButton);
         clearAllButton = (Button)v.findViewById(R.id.clearAllButton);
         stopButton = (Button)v.findViewById(R.id.stopButton);
-        joystick = (ImageView)v.findViewById(R.id.joystickView);
-        joystickDot = BitmapFactory.decodeResource(getResources(), R.drawable.dot);
+        joystick = (JoystickView)v.findViewById(R.id.joystickView);
 
         //Update connect button text if necessary (e.g. config change)
         if(client == null) {
@@ -86,8 +76,8 @@ public class ControlFragment extends Fragment {
             public void onClick(View v) {
                 if(client == null) {
                     client = new NetworkTask(connectButton.getContext(), connectButton);
-                    client.execute(ipText.getText().toString());
                     sendCommand();
+                    client.execute(ipText.getText().toString());
                     getActivity().getPreferences(getActivity().MODE_PRIVATE).edit().putString("server", ipText.getText().toString()).commit();
                 } else {
                     client.cancel(true);
@@ -127,21 +117,19 @@ public class ControlFragment extends Fragment {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                axes[0] = 0.0;
-                axes[1] = 0.0;
+                joystick.reset();
                 sendCommand();
             }
         });
 
         //Set up joystick listener
+        //Note: Since this is called before the JoystickView's onTouchEvent, touch values are always one frame behind
         joystick.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int centerX = joystick.getWidth() / 2;
-                int centerY = joystick.getHeight() / 2;
-                axes[0] = -((event.getX() - centerX) / centerX);
-                axes[1] = -((event.getY() - centerY) / centerY);
                 sendCommand();
+
+                //Don't consume touch event
                 return false;
             }
         });
@@ -153,17 +141,19 @@ public class ControlFragment extends Fragment {
 
     //Prepare and send JSON command packet
     public void sendCommand() {
+        //Make sure a NetworkTask object exists to send the command to, and that all values are available
         if(client == null) {
             return;
         }
 
+        //Build and send the command packet
         JSONObject command = new JSONObject();
         try {
             command.put("isClient", true);
             command.put("isRobot", false);
             command.put("ping", false);
 
-            command.put("axes", new JSONArray(axes));
+            command.put("axes", new JSONArray(joystick.getScaledAxes()));
 
             boolean[] buttonValues = new boolean[buttons.length];
             for(int i = 0; i < buttons.length; i++) {

@@ -7,6 +7,7 @@ public class TelepresenceRemote extends AppCompatActivity {
 
     private ControlFragment fragment;
 
+    //Shell activity; does nothing but load a worker fragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/connectButton" />
 
-    <ImageView android:id="@+id/joystickView"
+    <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/joystickView"
         android:src="@drawable/joystick"
         android:layout_width="200dp"
         android:layout_height="200dp"

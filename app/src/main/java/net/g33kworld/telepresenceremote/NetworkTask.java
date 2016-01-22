@@ -41,6 +41,7 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
         }
     }
 
+    //Main network loop
     protected String doInBackground(String... hostname) {
         //Get server address
         try {
@@ -63,14 +64,14 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
         while(!isCancelled() && socket.isConnected()) {
             try {
                 //Create and send UDP packet
-                if(counter < 20) {
+                if(counter < 50) {
                     try {
                         command.put("frameNum", commandFrame++);
                         command.put("time", System.currentTimeMillis());
                     } catch(JSONException e) {return "JSON error";}
                     socket.send(new DatagramPacket(command.toString().getBytes(), command.toString().getBytes().length, server, 8353));
                 } else {
-                    //Ping every 20th packet
+                    //Ping every 50th packet
                     try {
                         ping.put("frameNum", pingFrame++);
                         ping.put("time", System.currentTimeMillis());
@@ -96,6 +97,7 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
         return null;
     }
 
+    //Update text of connect button
     protected void onProgressUpdate(Boolean... connected) {
         if(connected[0]) {
             connectButton.setText(R.string.connected);
@@ -104,18 +106,21 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
         }
     }
 
+    //Display any messages from main loop on completion
     protected void onPostExecute(String result) {
         if(result != null) {
             Toast.makeText(parentContext, result, Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Display any messages from main loop on cancellation
     protected void onCancelled(String result) {
         if(result != null) {
             Toast.makeText(parentContext, result, Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Update JSON command sent by main loop
     public synchronized void setCommand(JSONObject command) {
         this.command = command;
     }
