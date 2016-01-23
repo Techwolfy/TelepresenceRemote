@@ -34,6 +34,15 @@ public class JoystickView extends View {
         y = 1.0f;
     }
 
+    //Constrain the view to be square regardless of available space
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        //Use the smallest layout dimension for both width and height
+        setMeasuredDimension(Math.min(getMeasuredWidth(), getMeasuredHeight()), Math.min(getMeasuredWidth(), getMeasuredHeight()));
+    }
+
     //Update variables dependent on view size (also resets stored X and Y coordinates)
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {

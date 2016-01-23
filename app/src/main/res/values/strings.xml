@@ -29,5 +29,5 @@
     <string name="setAllButton">Set All</string>
     <string name="clearAllButton">Clear All</string>
 
-    <string name="stop">Stop\nRobot</string>
+    <string name="stop">Stop Robot</string>
 </resources>
