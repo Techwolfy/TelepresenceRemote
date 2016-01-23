@@ -12,105 +12,81 @@
                   android:textOn="@string/buttonOn0"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button1"
                   android:textOff="@string/buttonOff1"
                   android:textOn="@string/buttonOn1"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button2"
                   android:textOff="@string/buttonOff2"
                   android:textOn="@string/buttonOn2"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button3"
                   android:textOff="@string/buttonOff3"
                   android:textOn="@string/buttonOn3"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button4"
                   android:textOff="@string/buttonOff4"
                   android:textOn="@string/buttonOn4"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button5"
                   android:textOff="@string/buttonOff5"
                   android:textOn="@string/buttonOn5"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button6"
                   android:textOff="@string/buttonOff6"
                   android:textOn="@string/buttonOn6"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button7"
                   android:textOff="@string/buttonOff7"
                   android:textOn="@string/buttonOn7"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button8"
                   android:textOff="@string/buttonOff8"
                   android:textOn="@string/buttonOn8"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <Button android:id="@+id/setAllButton"
             android:text="@string/setAllButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill_horizontal" />
+            grid:layout_columnWeight="1" />
 
     <ToggleButton android:id="@+id/button9"
                   android:textOff="@string/buttonOff9"
                   android:textOn="@string/buttonOn9"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  grid:layout_columnWeight="1"
-                  grid:layout_rowWeight="1"
-                  grid:layout_gravity="fill_horizontal" />
+                  grid:layout_columnWeight="1" />
 
     <Button android:id="@+id/clearAllButton"
             android:text="@string/clearAllButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            grid:layout_columnWeight="1"
-            grid:layout_rowWeight="1"
-            grid:layout_gravity="fill_horizontal" />
+            grid:layout_columnWeight="1" />
 
 </android.support.v7.widget.GridLayout>
