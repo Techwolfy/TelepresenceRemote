@@ -4,14 +4,19 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class JoystickView extends View {
 
-    private Paint joyPaint;
-    private float radius;
+    private Paint bgPaint;
+    private Paint fgPaint;
+    private Paint linePaint;
+    private Path bgArrows;
+    private float arrowRadius;
+    private float dotRadius;
     private float centerX;
     private float centerY;
     private float x;
@@ -20,12 +25,18 @@ public class JoystickView extends View {
     public JoystickView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //Set view background image from XML "android:src" attribute (background is blank if attribute is missing)
-        setBackgroundResource(attrs.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "src", 0));
-
-        //Initialize variables for drawing
-        joyPaint = new Paint(Color.BLACK);
-        radius = 0.0f;
+        //Initialize all variables for drawing
+        bgPaint = new Paint();
+        bgPaint.setColor(Color.GRAY);
+        fgPaint = new Paint();
+        fgPaint.setColor(Color.BLACK);
+        linePaint = new Paint();
+        linePaint.setColor(Color.DKGRAY);
+        linePaint.setStyle(Paint.Style.STROKE);
+        linePaint.setStrokeCap(Paint.Cap.ROUND);
+        bgArrows = new Path();
+        arrowRadius = 0.0f;
+        dotRadius = 0.0f;
         centerX = 1.0f;
         centerY = 1.0f;
 
@@ -46,18 +57,44 @@ public class JoystickView extends View {
     //Update variables dependent on view size (also resets stored X and Y coordinates)
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        radius = ((w + h) / 2) * 0.1f;
+        //Calculate size-dependent display variables
+        arrowRadius = ((w + h) / 2) * 0.3f;
+        dotRadius = ((w + h) / 2) * 0.1f;
         centerX = w / 2;
         centerY = h / 2;
         x = centerX;
         y = centerY;
+
+        //Calculate diamond for joystick arrows
+        bgArrows = new Path();
+        bgArrows.setFillType(Path.FillType.EVEN_ODD);
+        bgArrows.moveTo(dotRadius, centerY);
+        bgArrows.lineTo(centerX, dotRadius);
+        bgArrows.lineTo(w - dotRadius, centerY);
+        bgArrows.lineTo(centerX, h - dotRadius);
+        bgArrows.lineTo(dotRadius, centerY);
+        bgArrows.close();
+
+        //Calculate joystick line thickness
+        linePaint.setStrokeWidth(dotRadius);
     }
 
-    //Draw touch point on canvas
+    //Draw joystick background and touch point on canvas
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawCircle(x, y, radius, joyPaint);
+
+        //Draw main background circle
+        canvas.drawCircle(centerX, centerY, centerX, bgPaint);
+        //Draw diamond for background arrows
+        canvas.drawPath(bgArrows, fgPaint);
+        //Draw circle to remove center of diamond
+        canvas.drawCircle(centerX, centerY, arrowRadius, bgPaint);
+
+        //Draw joystick line
+        canvas.drawLine(centerX, centerY, x, y, linePaint);
+        //Draw touch point
+        canvas.drawCircle(x, y, dotRadius, fgPaint);
     }
 
     //Process touch events

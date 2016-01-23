@@ -39,9 +39,9 @@
         android:layout_above="@+id/stopButton">
 
         <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/joystickView"
-            android:src="@drawable/joystick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
