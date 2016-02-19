@@ -1,7 +1,8 @@
 <resources>
     <string name="appName">Telepresence Remote</string>
 
-    <string name="ipLabel">Robot IP Address:</string>
+    <string name="addressLabel">Robot Network Address:</string>
+    <string name="keyLabel">Connection Key:</string>
     <string name="connected">Disconnect</string>
     <string name="disconnected">Connect</string>
 

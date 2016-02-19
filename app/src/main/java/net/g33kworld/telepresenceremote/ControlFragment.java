@@ -21,7 +21,8 @@ public class ControlFragment extends Fragment {
 
     private NetworkTask client;
 
-    private EditText ipText;
+    private EditText addressText;
+    private EditText keyText;
     private Button connectButton;
     private ToggleButton[] buttons;
     private Button setAllButton;
@@ -42,7 +43,8 @@ public class ControlFragment extends Fragment {
         View v = inflater.inflate(R.layout.control_fragment, container, false);
 
         //Retrieve and initialize EditText, Button, and Joystick objects
-        ipText = (EditText)v.findViewById(R.id.ipText);
+        addressText = (EditText)v.findViewById(R.id.addressText);
+        keyText = (EditText)v.findViewById(R.id.keyText);
         connectButton = (Button)v.findViewById(R.id.connectButton);
         buttons = new ToggleButton[10];
         buttons[0] = (ToggleButton)v.findViewById(R.id.button0);
@@ -67,18 +69,21 @@ public class ControlFragment extends Fragment {
             connectButton.setText(R.string.connected);
         }
 
-        //Retrieve last used server
-        ipText.setText(getActivity().getPreferences(getActivity().MODE_PRIVATE).getString("server", ""));
+        //Retrieve last used server and key
+        addressText.setText(getActivity().getPreferences(getActivity().MODE_PRIVATE).getString("server", ""));
+        keyText.setText(getActivity().getPreferences(getActivity().MODE_PRIVATE).getString("key", ""));
 
         //Set up connect button listener
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(client == null) {
-                    client = new NetworkTask(connectButton.getContext(), connectButton);
+                    client = new NetworkTask(connectButton.getContext(), connectButton, keyText.getText().toString());
                     sendCommand();
-                    client.execute(ipText.getText().toString());
-                    getActivity().getPreferences(getActivity().MODE_PRIVATE).edit().putString("server", ipText.getText().toString()).commit();
+                    client.execute(addressText.getText().toString());
+                    //Save server and key
+                    getActivity().getPreferences(getActivity().MODE_PRIVATE).edit().putString("server", addressText.getText().toString()).commit();
+                    getActivity().getPreferences(getActivity().MODE_PRIVATE).edit().putString("key", keyText.getText().toString()).commit();
                 } else {
                     client.cancel(true);
                     client = null;

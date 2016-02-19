@@ -3,30 +3,48 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp">
 
-    <TextView android:id="@+id/ipLabel"
-        android:text="@string/ipLabel"
+    <TextView android:id="@+id/addressLabel"
+        android:text="@string/addressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="3dp"
-        android:layout_alignBottom="@+id/ipText"
-        android:layout_alignTop="@+id/ipText"
+        android:layout_alignBottom="@id/addressText"
+        android:layout_alignTop="@id/addressText"
         android:gravity="center_vertical" />
 
-    <EditText android:id="@+id/ipText"
+    <EditText android:id="@+id/addressText"
         android:inputType="textUri"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/ipLabel" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/addressLabel"
+        android:layout_alignRight="@id/buttonGrid"/>
+
+    <TextView android:id="@+id/keyLabel"
+        android:text="@string/keyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_alignBottom="@id/keyText"
+        android:layout_alignTop="@id/keyText"
+        android:layout_toRightOf="@id/buttonGrid"
+        android:gravity="center_vertical" />
+
+    <EditText android:id="@+id/keyText"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/keyLabel" />
 
     <Button android:id="@+id/connectButton"
         android:text="@string/disconnected"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_below="@id/ipText"
-        android:layout_toRightOf="@+id/buttonGrid" />
+        android:layout_below="@id/addressText"
+        android:layout_toRightOf="@id/buttonGrid" />
 
     <include android:id="@+id/buttonGrid"
         layout="@layout/button_grid"
@@ -34,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/ipText" />
+        android:layout_below="@id/addressText" />
 
     <RelativeLayout android:id="@+id/joystickLayout"
         android:layout_width="match_parent"

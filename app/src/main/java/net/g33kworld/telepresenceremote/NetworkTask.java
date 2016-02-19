@@ -19,6 +19,7 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
 
     private Context parentContext;
     private Button connectButton;
+    private String key;
 
     private int commandFrame;
     private int pingFrame;
@@ -27,15 +28,17 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
     private InetAddress server;
     private DatagramSocket socket;
 
-    public NetworkTask(Context parentContext, Button connectButton) {
+    public NetworkTask(Context parentContext, Button connectButton, String key) {
         this.parentContext = parentContext;
         this.connectButton = connectButton;
+        this.key = key;
         command = new JSONObject();
         ping = new JSONObject();
         try {
             ping.put("isClient", true);
             ping.put("isRobot", false);
             ping.put("ping", true);
+            ping.put("key", key);
         } catch(JSONException e) {
             //These values are hard-coded and should never cause exceptions
         }
@@ -67,6 +70,7 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
                 if(counter < 50) {
                     try {
                         command.put("frameNum", commandFrame++);
+                        command.put("key", key);
                         command.put("time", System.currentTimeMillis());
                     } catch(JSONException e) {return "JSON error";}
                     socket.send(new DatagramPacket(command.toString().getBytes(), command.toString().getBytes().length, server, 8353));
