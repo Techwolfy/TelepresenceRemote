@@ -28,7 +28,8 @@ public class ControlFragment extends Fragment {
     private Button setAllButton;
     private Button clearAllButton;
     private Button stopButton;
-    private JoystickView joystick;
+    private JoystickView lJoystick;
+    private JoystickView rJoystick;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,8 @@ public class ControlFragment extends Fragment {
         setAllButton = (Button)v.findViewById(R.id.setAllButton);
         clearAllButton = (Button)v.findViewById(R.id.clearAllButton);
         stopButton = (Button)v.findViewById(R.id.stopButton);
-        joystick = (JoystickView)v.findViewById(R.id.joystickView);
+        lJoystick = (JoystickView)v.findViewById(R.id.lJoystickView);
+        rJoystick = (JoystickView)v.findViewById(R.id.rJoystickView);
 
         //Update connect button text if necessary (e.g. config change)
         if(client == null) {
@@ -122,14 +124,24 @@ public class ControlFragment extends Fragment {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                joystick.reset();
+                lJoystick.reset();
+                rJoystick.reset();
                 sendCommand();
             }
         });
 
-        //Set up joystick listener
-        //Note: Since this is called before the JoystickView's onTouchEvent, touch values are always one frame behind
-        joystick.setOnTouchListener(new View.OnTouchListener() {
+        //Set up joystick listeners
+        //Note: Since this is called before the JoystickViews' onTouchEvents, touch values are always one frame behind
+        lJoystick.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                sendCommand();
+
+                //Don't consume touch event
+                return false;
+            }
+        });
+        rJoystick.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 sendCommand();
@@ -158,7 +170,8 @@ public class ControlFragment extends Fragment {
             command.put("isRobot", false);
             command.put("ping", false);
 
-            command.put("axes", new JSONArray(joystick.getScaledAxes()));
+            float[] axisValues = {lJoystick.getScaledX(), lJoystick.getScaledY(), rJoystick.getScaledX(), rJoystick.getScaledY()};
+            command.put("axes", new JSONArray(axisValues));
 
             boolean[] buttonValues = new boolean[buttons.length];
             for(int i = 0; i < buttons.length; i++) {

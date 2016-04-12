@@ -49,19 +49,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/connectButton" />
 
-    <RelativeLayout android:id="@+id/joystickLayout"
+    <LinearLayout android:id="@+id/joystickLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/buttonGrid"
-        android:layout_above="@+id/stopButton">
+        android:layout_above="@+id/stopButton"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:weightSum="2">
 
-        <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/joystickView"
+        <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/lJoystickView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginRight="10dp"
+            android:layout_weight="1" />
 
-    </RelativeLayout>
+        <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/rJoystickView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <Button android:id="@+id/stopButton"
         android:layout_width="match_parent"

@@ -107,6 +107,18 @@ public class JoystickView extends View {
         x = event.getX();
         y = event.getY();
 
+        //Restrict values that are out of range
+        if(x < 0.0f) {
+            x = 0.0f;
+        } else if(x > (centerX * 2)) {
+            x = centerX * 2;
+        }
+        if(y < 0.0f) {
+            y = 0.0f;
+        } else if(y > (centerY * 2)) {
+            y = centerY * 2;
+        }
+
         //Force view to be redrawn to show new touch point
         invalidate();
 

@@ -73,14 +73,14 @@ public class NetworkTask extends AsyncTask<String, Boolean, String> {
                         command.put("key", key);
                         command.put("time", System.currentTimeMillis());
                     } catch(JSONException e) {return "JSON error";}
-                    socket.send(new DatagramPacket(command.toString().getBytes(), command.toString().getBytes().length, server, 8353));
+                    socket.send(new DatagramPacket((command.toString() + "\n").getBytes(), command.toString().getBytes().length + 1, server, 8353));
                 } else {
                     //Ping every 50th packet
                     try {
                         ping.put("frameNum", pingFrame++);
                         ping.put("time", System.currentTimeMillis());
                     } catch(JSONException e) {return "JSON error";}
-                    socket.send(new DatagramPacket(ping.toString().getBytes(), ping.toString().getBytes().length, server, 8353));
+                    socket.send(new DatagramPacket((ping.toString() + "\n").getBytes(), ping.toString().getBytes().length + 1, server, 8353));
                     counter = 0;
                 }
             } catch(IOException e) {

@@ -1,80 +1,119 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <LinearLayout android:id="@+id/connectionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout android:id="@+id/addressLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/addressLabel"
+                android:text="@string/addressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical" />
+
+            <EditText android:id="@+id/addressText"
+                android:inputType="textUri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_height="wrap_content" />
 
-    <TextView android:id="@+id/addressLabel"
-        android:text="@string/addressLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="3dp"
-        android:layout_alignBottom="@id/addressText"
-        android:layout_alignTop="@id/addressText"
-        android:gravity="center_vertical" />
+        </LinearLayout>
 
-    <EditText android:id="@+id/addressText"
-        android:inputType="textUri"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/addressLabel"
-        android:layout_alignRight="@id/buttonGrid"/>
+        <LinearLayout android:id="@+id/keyLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-    <TextView android:id="@+id/keyLabel"
-        android:text="@string/keyLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="3dp"
-        android:layout_alignBottom="@id/keyText"
-        android:layout_alignTop="@id/keyText"
-        android:layout_toRightOf="@id/buttonGrid"
-        android:gravity="center_vertical" />
+            <TextView android:id="@+id/keyLabel"
+                android:text="@string/keyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical" />
 
-    <EditText android:id="@+id/keyText"
-        android:inputType="text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/keyLabel" />
+            <EditText android:id="@+id/keyText"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <Button android:id="@+id/connectButton"
-        android:text="@string/disconnected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/addressText"
-        android:layout_toRightOf="@id/buttonGrid" />
+        </LinearLayout>
 
-    <include android:id="@+id/buttonGrid"
-        layout="@layout/button_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/addressText" />
+    </LinearLayout>
 
-    <RelativeLayout android:id="@+id/joystickLayout"
+    <LinearLayout android:id="@+id/controlLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/connectButton"
-        android:layout_toRightOf="@id/buttonGrid">
+        android:layout_below="@id/connectionLayout"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/joystickView"
+        <RelativeLayout android:id="@+id/leftLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button android:id="@+id/connectButton"
+                android:text="@string/disconnected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+
+            <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/lJoystickView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <include android:id="@+id/buttonGrid"
+            layout="@layout/button_grid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignParentRight="true" />
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-        <Button android:id="@+id/stopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/joystickView"
-            android:text="@string/stop" />
+        <RelativeLayout android:id="@+id/rightLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    </RelativeLayout>
+            <Button android:id="@+id/stopButton"
+                android:text="@string/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+
+            <net.g33kworld.telepresenceremote.JoystickView android:id="@+id/rJoystickView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
